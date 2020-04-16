@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Books & Authors</title>
+</head>
+<body>
+    <div class="container">
+        <div style="display: inline-block; margin: 25px;">
+            <h1>Add an Author</h1>
+            <form action="/add" method="POST">
+                <input type="hidden" name="add" value="add_author">
+                <div class="form-group">
+                  <label for="formGroupExampleInput">First Name</label>
+                  <input type="text" name="first_name" class="form-control" id="formGroupExampleInput">
+                </div>
+                <div class="form-group">
+                    <label for="formGroupExampleInput">Last Name</label>
+                    <input type="text" name="last_name" class="form-control" id="formGroupExampleInput">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Notes</label>
+                    <textarea class="form-control" name="notes" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Add</button>
+            </form>     
+        </div>
+        <div style="display: inline-block; margin: 25px;">
+            <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Action</th>                    
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for author in authors %}
+                      <tr>
+                        <th scope="row">{{author['id']}}</th>
+                        <td>{{author['first_name']}} {{author['last_name']}} </td>
+                        <td><a href="/authors/{{author['id']}}">View</a></td>                    
+                      </tr>                  
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <br>
+        <a href="/"><input type="button" value="Add a Book"></a>
+    </div>
+</body>
+</html>

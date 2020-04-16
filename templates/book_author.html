@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Books & Authors</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>{{book.title}}</h1>           
+            <h3>ID: {{book.id}} </h3>
+        </header>
+        <main>
+            <h4 style="display: inline-block;">Description: </h4>
+            <p style="display: inline-block;">{{book.description}}</p>
+        </main>
+        <h4>Authors: </h4>
+        <ul>
+            {% for author in book.book_authors %} 
+                <li> {{author['first_name']}} {{author['last_name']}} </li>
+            {% endfor %}
+        </ul>
+        <form action="/add" method="POST">   
+            <input type="hidden" name="add" value="authors_of_books">
+            <input type="hidden" name="book_id" value="{{book.id}}">         
+            <div class="form-group">              
+              <select class="form-control" name="author_of_book" id="exampleFormControlSelect1">
+                <option disabled selected value=""> -select an author</option>
+                {% for author in authors %}
+                  <option value="{{author['id']}}">{{author['first_name']}} {{author['last_name']}} </option>
+                {% endfor %}                
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+        <br>
+        <a href="/"><input type="button" value="Return"></a>
+    </div>
+</body>
+</html>

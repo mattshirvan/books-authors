@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Books & Authors</title>
+</head>
+<body>
+    <div class="container">
+        <div style="display: inline-block; margin: 25px;">
+            <h1>Add a Book</h1>
+            <form action="/add" method="POST">
+                <input type="hidden" name="add" value="add_book">
+                <div class="form-group">
+                  <label for="formGroupExampleInput">Title</label>
+                  <input type="text" name="title" class="form-control" id="formGroupExampleInput">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Description</label>
+                    <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Add</button>
+            </form>     
+        </div>
+        <div style="display: inline-block; margin: 25px;">
+            <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Action</th>                    
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for book in books %}
+                      <tr>
+                        <th scope="row">{{book['id']}}</th>
+                        <td>{{book['title']}}</td>
+                        <td><a href="/books/{{book['id']}}">View</a></td>                    
+                      </tr>                  
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <br>
+        <a href="/authors"><input type="button" value="Add an author"></a>
+    </div>
+</body>
+</html>
